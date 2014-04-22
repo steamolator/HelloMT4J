@@ -31,9 +31,10 @@ public class BrainTouch extends AbstractScene{
 	}
 	
 	public void initKeyboardButtons(final MTApplication mtApplication){
-		PImage keyboardImg = mtApplication.loadImage("data/keyboard.png");
+		PImage keyboardImg = mtApplication.loadImage("data/plus23.png");
+		keyboardImg.resize(64, 64);
 		//Keyboardbutton at the upper left corner
-		MTImageButton ulKeyboard = new MTImageButton(keyboardImg, mtApplication);
+		final MTImageButton ulKeyboard = new MTImageButton(keyboardImg, mtApplication);
 		ulKeyboard.setNoStroke(true);
 		ulKeyboard.addActionListener(new ActionListener() {
 					
@@ -41,7 +42,7 @@ public class BrainTouch extends AbstractScene{
 			public void actionPerformed(ActionEvent ae) {
 				switch (ae.getID()) {
 				case TapEvent.BUTTON_CLICKED:
-					createKeyboard(mtApplication);
+					createKeyboard(mtApplication, ulKeyboard.getPosition(TransformSpace.GLOBAL));
 				}
 			}
 		}); 
@@ -51,7 +52,7 @@ public class BrainTouch extends AbstractScene{
 				0));
 		
 		//Keyboardbutton at the upper right corner
-		MTImageButton urKeyboard = new MTImageButton(keyboardImg, mtApplication);
+		final MTImageButton urKeyboard = new MTImageButton(keyboardImg, mtApplication);
 		urKeyboard.setNoStroke(true);
 		urKeyboard.addActionListener(new ActionListener() {
 					
@@ -59,7 +60,7 @@ public class BrainTouch extends AbstractScene{
 			public void actionPerformed(ActionEvent ae) {
 				switch (ae.getID()) {
 				case TapEvent.BUTTON_CLICKED:
-					createKeyboard(mtApplication);
+					createKeyboard(mtApplication, urKeyboard.getPosition(TransformSpace.GLOBAL));
 				}
 			}
 		}); 
@@ -69,7 +70,7 @@ public class BrainTouch extends AbstractScene{
 				0));
 		
 		//Keyboardbutton at the lower left corner
-		MTImageButton llKeyboard = new MTImageButton(keyboardImg, mtApplication);
+		final MTImageButton llKeyboard = new MTImageButton(keyboardImg, mtApplication);
 		llKeyboard.setNoStroke(true);
 		llKeyboard.addActionListener(new ActionListener() {
 					
@@ -77,7 +78,7 @@ public class BrainTouch extends AbstractScene{
 			public void actionPerformed(ActionEvent ae) {
 				switch (ae.getID()) {
 				case TapEvent.BUTTON_CLICKED:
-					createKeyboard(mtApplication);
+					createKeyboard(mtApplication, llKeyboard.getPosition(TransformSpace.GLOBAL));
 				}	
 			}
 		});
@@ -89,7 +90,7 @@ public class BrainTouch extends AbstractScene{
 				0));
 				
 		//Keyboardbutton at the lower right corner
-		MTImageButton lrKeyboard = new MTImageButton(keyboardImg, mtApplication);
+		final MTImageButton lrKeyboard = new MTImageButton(keyboardImg, mtApplication);
 		lrKeyboard.setNoStroke(true);
 		lrKeyboard.addActionListener(new ActionListener() {
 					
@@ -97,7 +98,7 @@ public class BrainTouch extends AbstractScene{
 			public void actionPerformed(ActionEvent ae) {
 				switch (ae.getID()) {
 				case TapEvent.BUTTON_CLICKED:
-					createKeyboard(mtApplication);
+					createKeyboard(mtApplication, lrKeyboard.getPosition(TransformSpace.GLOBAL));
 				}	
 			}
 		});
@@ -108,7 +109,6 @@ public class BrainTouch extends AbstractScene{
 				pApplet.height - lrKeyboard.getHeightXY(TransformSpace.GLOBAL) - 5,
 				0));
 	}
-	
 	
 	public void createTextArea(String text)
 	{
@@ -122,14 +122,11 @@ public class BrainTouch extends AbstractScene{
 		textArea.setPositionGlobal(new Vector3D(pApplet.width/2f, pApplet.height/2f));
 	}
 	
-	public void createKeyboard(MTApplication mtApplication) {
-		
+	public void createKeyboard(MTApplication mtApplication, Vector3D position) {
 		Keyboard keyboard = new Keyboard(mtApplication);
 		this.getCanvas().addChild(keyboard);
-		
-		
+		keyboard.setPositionGlobal(position);
 	}
-	
 	
 	@Override
 	public void init() {
@@ -142,7 +139,5 @@ public class BrainTouch extends AbstractScene{
 		// TODO Auto-generated method stub
 		
 	}
-	
-	
 
 }
