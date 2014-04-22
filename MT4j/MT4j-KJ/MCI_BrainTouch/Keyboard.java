@@ -8,8 +8,6 @@ public class Keyboard extends MTTextKeyboard {
 
 	public Keyboard(PApplet pApplet) {
 		super(pApplet);
-	
-		
 	}
 
 }
