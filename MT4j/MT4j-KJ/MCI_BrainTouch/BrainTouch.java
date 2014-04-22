@@ -27,7 +27,6 @@ public class BrainTouch extends AbstractScene{
 		this.setClearColor(new MTColor(146, 150, 188, 255));
 		this.registerGlobalInputProcessor(new CursorTracer(mtApplication, this));
 		initKeyboardButtons(mtApplication); 
-		
 	}
 	
 	public void initKeyboardButtons(final MTApplication mtApplication){
@@ -125,7 +124,30 @@ public class BrainTouch extends AbstractScene{
 	public void createKeyboard(MTApplication mtApplication, Vector3D position) {
 		Keyboard keyboard = new Keyboard(mtApplication);
 		this.getCanvas().addChild(keyboard);
-		keyboard.setPositionGlobal(position);
+		if (position.x >= mtApplication.width/2) {
+			if (position.y >= mtApplication.height/2) {
+				keyboard.setPositionGlobal(new Vector3D(position.x - keyboard.getWidthXY(TransformSpace.GLOBAL)/2,
+						position.y - keyboard.getHeightXY(TransformSpace.GLOBAL)/2,
+						1));
+			} else {
+				keyboard.setPositionGlobal(new Vector3D(position.x - keyboard.getWidthXY(TransformSpace.GLOBAL)/2,
+						position.y + keyboard.getHeightXY(TransformSpace.GLOBAL)/2,
+						1));
+			}
+			
+		} else {
+			if (position.y >= mtApplication.height/2) {
+				keyboard.setPositionGlobal(new Vector3D(position.x + keyboard.getWidthXY(TransformSpace.GLOBAL)/2,
+						position.y - keyboard.getHeightXY(TransformSpace.GLOBAL)/2,
+						1));
+			} else {
+				keyboard.setPositionGlobal(new Vector3D(position.x + keyboard.getWidthXY(TransformSpace.GLOBAL)/2,
+						position.y + keyboard.getHeightXY(TransformSpace.GLOBAL)/2,
+						1));
+			}
+			
+		}
+
 	}
 	
 	@Override
